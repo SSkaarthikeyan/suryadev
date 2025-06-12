@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suryadev</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding-top: 80px;
+            min-height: 100vh;
+            position: relative;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            margin-top: 0;
+        }
+
+        /* Split background effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            background-color: white;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh;
+            background-color: #000000;
+            z-index: -1;
+        }
+
+        /* Top bar styles */
+        .top-bar {
+            background-color: #f8f9fa;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            color: #FF6B00;
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        .contact-item i:first-child {
+            margin-left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .life-at {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Main header styles */
+        .main-header {
+            background-color: white;
+            padding: 25px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 65px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin: 0 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 17px;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            padding: 8px 0;
+        }
+
+        .nav-menu a span {
+            position: relative;
+        }
+
+        .nav-menu a span::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #FF6B00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover span::after {
+            width: 100%;
+        }
+
+        .nav-menu a.has-dropdown::after {
+            content: '▼';
+            font-size: 10px;
+            margin-left: 6px;
+            color: #666;
+            vertical-align: middle;
+        }
+
+        .enquiry-section {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .enquiry-text {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .enquiry-phone {
+            color: #FF6B00;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .enquiry-phone i {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-content,
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .contact-info,
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .social-links {
+                margin-top: 10px;
+            }
+
+            .enquiry-section {
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+
+        /* Banner Section */
+        .banner {
+            width: 100%;
+            height: 60vh; /* Reduced from 100vh to 60vh */
+            position: relative;
+            overflow: hidden;
+            background-color: black;
+            margin-bottom: 40px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 0 0 80px;
+            background-color: white;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+        }
+
+        .about-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .main-image {
+            grid-column: 1 / -1;
+            width: 100%;
+            height: 300px;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .side-images {
+            display: contents;
+        }
+
+        .side-images img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .about-content {
+            flex: 1;
+            padding-top: 0;
+        }
+
+        .about-content h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .about-content h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #FF6B00;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .view-more-btn:hover {
+            background-color: #e65c00;
+            color: white;
+        }
+
+        /* Statistics Section */
+        .statistics-section {
+            background: url('https://suryadev.in/wp-content/uploads/2024/12/Group-56.webp') no-repeat right center;
+            background-size: contain;
+            padding: 100px 0;
+            color: white;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .statistics-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255, 107, 0, 0.95) 0%, rgba(255, 107, 0, 0.95) 70%, rgba(255, 107, 0, 0.85) 100%);
+            z-index: 1;
+        }
+
+        .statistics-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+            gap: 30px;
+        }
+
+        .statistic-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0;
+            height: 120px;
+            justify-content: space-between;
+        }
+
+        .number-with-unit {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 8px;
+            height: 70px;
+            line-height: 1;
+        }
+
+        .counter-count.statistic-number,
+        .rating-count.statistic-number,
+        .unit {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1;
+            color: white;
+            display: inline-block;
+            white-space: nowrap;
+            font-family: Arial, sans-serif;
+        }
+
+        .statistic-label {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.2;
+            white-space: nowrap;
+            padding: 0 10px;
+            margin-top: auto;
+        }
+
+        .statistic-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 1200px) {
+            .statistics-container {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+
+            .counter-count.statistic-number,
+            .rating-count.statistic-number,
+            .unit {
+                font-size: 52px;
+            }
+
+            .statistic-item {
+                height: 100px;
+            }
+
+            .number-with-unit {
+                height: 60px;
+            }
+
+            .statistic-label {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .statistics-section {
+                padding: 60px 0;
+            }
+
+            .statistics-container {
+                flex-wrap: wrap;
+                gap: 40px 20px;
+            }
+
+            .statistic-item {
+                flex: 0 0 calc(50% - 10px);
+                height: 90px;
+            }
+
+            .number-with-unit {
+                height: 50px;
+            }
+
+            .statistic-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .counter-count.statistic-number,
+            .rating-count.statistic-number,
+            .unit {
+                font-size: 42px;
+            }
+
+            .statistic-label {
+                font-size: 15px;
+                padding: 0;
+            }
+        }
+
+        /* Factory Image Section */
+        .factory-image-section {
+            width: 100%;
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        .factory-image-container {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://suryadev.in/wp-content/uploads/2024/12/Edited-Factory-image-F-1-1-scaled-1.webp');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-overlay {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .video-overlay h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background-color: #FF6B00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: #e65c00;
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 40px;
+            margin-left: 8px;
+        }
+
+        .factory-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background-color: transparent;
+            border: none;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 0 !important;
+        }
+
+        .btn-close {
+            position: absolute;
+            right: -30px;
+            top: -30px;
+            background-color: white;
+            opacity: 1;
+            padding: 0.5rem;
+            z-index: 2;
+        }
+
+        .btn-close:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .video-overlay h1 {
+                font-size: 32px;
+                padding: 0 20px;
+            }
+
+            .play-button {
+                width: 80px;
+                height: 80px;
+            }
+
+            .play-button i {
+                font-size: 30px;
+            }
+
+            .btn-close {
+                right: 0;
+                top: -40px;
+            }
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .product-content h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .product-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .discover-more {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 30px;
+            background-color: #FF6B00;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .discover-more:hover {
+            background-color: #e65c00;
+        }
+
+        .discover-more span {
+            margin-right: 8px;
+        }
+
+        .discover-more i {
+            font-size: 14px;
+        }
+
+        /* Product Tabs Styles */
+        .product-tabs-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .product-tabs-box {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .nav-tabs {
+            border: none !important;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .nav-tabs .nav-link {
+            border: none !important;
+            color: #666;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px 30px;
+            margin: 0 10px;
+            transition: all 0.3s;
+            background: none;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #FF6B00 !important;
+            background-color: transparent !important;
+            border-bottom: 3px solid #FF6B00 !important;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: #FF6B00;
+            border-color: transparent;
+        }
+
+        .tab-content {
+            background: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .tab-pane {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .tab-pane.show {
+            opacity: 1;
+        }
+
+        .product-tab-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .product-tab-image {
+            flex: 1;
+            height: 400px;
+        }
+
+        .product-tab-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-tab-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .product-tab-content h3 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .product-tab-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .discover-more-tab {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 30px;
+            background-color: #FF6B00;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .discover-more-tab:hover {
+            background-color: #e65c00;
+            color: white !important;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .product-tab-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .product-tab-image,
+            .product-tab-content {
+                width: 100%;
+            }
+
+            .nav-tabs .nav-link {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+        }
+
+        /* Media & TVC Section */
+        .media-split-section {
+            position: relative;
+            width: 100%;
+            background: #000;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .strength-content {
+            position: relative;
+            height: 100vh;
+            background: url('https://suryadev.in/wp-content/uploads/2024/12/Inner-Strength-01-1-scaled.webp') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 4rem 2rem;
+            background-color: black;
+        }
+
+        .strength-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .logo-overlay {
+            position: relative;
+            z-index: 2;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .strength-content h2 {
+            position: relative;
+            z-index: 2;
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            font-style: italic;
+            margin-top: 20vh;
+        }
+
+        .discover-more {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 35px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .discover-more:hover {
+            background-color: #FF6B00;
+            color: white;
+            text-decoration: none;
+        }
+
+        .discover-more i {
+            margin-left: 12px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .video-wrapper,
+            .strength-content {
+                height: 50vh;
+            }
+
+            .strength-content h2 {
+                font-size: 2.5rem;
+                margin-top: 10vh;
+            }
+
+            .logo-overlay {
+                max-width: 150px;
+            }
+
+            .discover-more {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Social Impact Section Styles */
+        .social-impact {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .social-impact .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .social-impact-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            padding: 0;
+        }
+
+        .impact-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .impact-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 30px 20px;
+            color: white;
+        }
+
+        .card-overlay h2 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 1200px) {
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .impact-card {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-card {
+                height: 250px;
+            }
+
+            .social-impact-title {
+                font-size: 28px;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: #FF6B00;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-item i {
+            color: #FF6B00;
+            font-size: 16px;
+            width: 16px;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .address-lines p {
+            margin: 0;
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+
+        .address-lines p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-text p {
+            margin: 0;
+        }
+
+        .contact-text a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+        }
+
+        .contact-text a:hover {
+            color: #FF6B00;
+        }
+
+        .contact-text .divider {
+            margin: 0 8px;
+            color: #666;
+        }
+
+        .email-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .email-group .divider {
+            display: none;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            color: #FF6B00;
+            font-size: 16px;
+            width: 16px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .contact-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .contact-text p {
+            margin: 0;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .contact-text p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top bar with contact info -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>044 42221000</span>
+                    <span style="margin: 0 10px; color: #666;">|</span>
+                    <i class="fas fa-envelope"></i>
+                    <span>sales@suryadev.in / info@suryadev.in</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="life-at">Life at Suryadev</a>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main header - this will be sticky -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://suryadev.in/wp-content/uploads/2024/12/logo-1.png" alt="Suryadev Alloys and Power">
+            </div>
+            <nav class="nav-menu">
+                <a href="#about" class="has-dropdown"><span>About Us</span></a>
+                <a href="#products" class="has-dropdown"><span>Products</span></a>
+                <a href="#csr"><span>CSR</span></a>
+                <a href="#media" class="has-dropdown"><span>Media & Downloads</span></a>
+                <a href="#contact"><span>Contact Us</span></a>
+            </nav>
+            <div class="enquiry-section">
+                <span class="enquiry-text">Call for enquiry</span>
+                <a href="tel:+919381850000" class="enquiry-phone">
+                    <i class="fas fa-phone"></i>
+                    +91 93818 50000
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- Banner Section -->
+        <section class="banner">
+            <img src="https://suryadev.in/wp-content/uploads/2024/12/suryadev_banner.webp" alt="True Inner Strength">
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-container">
+                <div class="about-images">
+                    <div class="main-image">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/About-us-2nd-image.webp" alt="About Suryadev">
+                    </div>
+                    <div class="side-images">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/vlcsnap-2024-10-26-16h57m31s155-copy-2048x1152-1.webp" alt="Factory Operations">
+                        <img src="https://suryadev.in/wp-content/uploads/2025/02/Tmt-steel-manufacturer.webp" alt="Steel Manufacturing">
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2>About Us</h2>
+                    <h1>TMT Bar<br>Manufacturer</h1>
+                    <p>Established in 2006, Suryadev Alloys and Power is a leading Tmt Bar Manufacturer steel manufacturer in South India, producing high-quality intermediate and finished steel products. It operates an integrated steel plant in Tamil Nadu with a capacity of 600,000 tonnes Tmt Steel Bars per annum. The company also plays a key role in state's energy sector, operating thermal and waste heat recovery power plants with a combined capacity of 190 MW. Certified to ISO 9001, ISO 14001, and ISO 45000 standards, and adhering to BIS norms, Suryadev is backed by strong credit ratings and a skilled workforce of over 2,000 professionals dedicated to quality and innovation.</p>
+                    <a href="#" class="view-more-btn">View More →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="statistics-section">
+            <div class="statistics-container">
+                <div class="statistic-item">
+                    <div class="number-with-unit">
+                        <span class="counter-count statistic-number">2578</span>
+                    </div>
+                    <div class="statistic-label">Employee Strength</div>
+                </div>
+                <div class="statistic-item">
+                    <div class="number-with-unit">
+                        <span class="counter-count statistic-number">600</span>
+                        <span class="unit">KTPA</span>
+                    </div>
+                    <div class="statistic-label">Finished Steel Capacity</div>
+                </div>
+                <div class="statistic-item">
+                    <div class="number-with-unit">
+                        <span class="counter-count statistic-number">190</span>
+                        <span class="unit">MW</span>
+                    </div>
+                    <div class="statistic-label">Power Generation Capacity</div>
+                </div>
+                <div class="statistic-item">
+                    <div class="number-with-unit">
+                        <span class="rating-count statistic-number">A-/A2</span>
+                    </div>
+                    <div class="statistic-label">Credit Rating (CARE)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Factory Image Section -->
+        <section class="factory-image-section">
+            <div class="factory-image-container">
+                <div class="video-overlay">
+                    <h1>Click to Watch Our Corporate Video</h1>
+                    <div class="play-button" data-bs-toggle="modal" data-bs-target="#corporateVideoModal">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Modal -->
+        <div class="modal fade" id="corporateVideoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/IN-Dt6Zl264" title="Suryadev Corporate Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section with Tabs -->
+        <section class="product-tabs-section">
+            <div class="product-tabs-box">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="sponge-tab" data-bs-toggle="tab" data-bs-target="#sponge" type="button" role="tab" aria-controls="sponge" aria-selected="true">Sponge Iron</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="billets-tab" data-bs-toggle="tab" data-bs-target="#billets" type="button" role="tab" aria-controls="billets" aria-selected="false">Mild Steel Billets</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tmt-tab" data-bs-toggle="tab" data-bs-target="#tmt" type="button" role="tab" aria-controls="tmt" aria-selected="false">TMT Bars</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="rounds-tab" data-bs-toggle="tab" data-bs-target="#rounds" type="button" role="tab" aria-controls="rounds" aria-selected="false">Mild Steel Rounds</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="sponge" role="tabpanel" aria-labelledby="sponge-tab">
+                        <div class="product-tab-container">
+                            <div class="product-tab-image">
+                                <img src="https://suryadev.in/wp-content/uploads/2024/12/DSC00197-scaled-1-2048x1366.webp" alt="Sponge Iron">
+                            </div>
+                            <div class="product-tab-content">
+                                <h3>Sponge Iron</h3>
+                                <p>Sponge Iron, also known as Direct Reduced Iron (DRI), is an essential raw material for manufacturing premium-grade steel. Produced by reducing high-quality iron ore without melting, it serves as a superior alternative to scrap metal in steelmaking, ensuring higher purity and consistency.</p>
+                                <a href="#" class="discover-more-tab">
+                                    <span>Discover More</span>
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="billets" role="tabpanel" aria-labelledby="billets-tab">
+                        <div class="product-tab-container">
+                            <div class="product-tab-image">
+                                <img src="https://site.suryadev.in/public/frontend/assets/images/billet2.webp" alt="Mild Steel Billets">
+                            </div>
+                            <div class="product-tab-content">
+                                <h3>Mild Steel Billets</h3>
+                                <p>MS Billets are the foundation of high-quality steel products, serving as the essential raw material for manufacturing TMT bars, structural steel, and other long products. Suryadev's MS Billets are manufactured using Sponge Iron in its state-of-the-art New Gummidipoondi Steel Plant and adhere to BIS 14650 standards.</p>
+                                <a href="#" class="discover-more-tab">
+                                    <span>Discover More</span>
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tmt" role="tabpanel" aria-labelledby="tmt-tab">
+                        <div class="product-tab-container">
+                            <div class="product-tab-image">
+                                <img src="https://suryadev.in/wp-content/uploads/2024/12/TMT-Bars-03-2048x1913.webp" alt="TMT Bars">
+                            </div>
+                            <div class="product-tab-content">
+                                <h3>TMT Bars</h3>
+                                <p>TMT (Thermo-Mechanically Treated) Rebars are high-strength reinforcement bars widely used in construction due to their superior strength, flexibility, and resistance to corrosion. Suryadev TMT Rebars are available in a wide range of grades and sizes, from 8mm to 40mm in diameter, and can be customized to specific lengths to meet the unique requirements of any project.</p>
+                                <a href="#" class="discover-more-tab">
+                                    <span>Discover More</span>
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="rounds" role="tabpanel" aria-labelledby="rounds-tab">
+                        <div class="product-tab-container">
+                            <div class="product-tab-image">
+                                <img src="https://suryadev.in/wp-content/uploads/2024/12/MS-Billets.webp" alt="Mild Steel Rounds">
+                            </div>
+                            <div class="product-tab-content">
+                                <h3>Mild Steel Rounds</h3>
+                                <p>Mild Steel Rounds are versatile steel products widely used across industries for their ease of use and adaptability. Their combination of strength and flexibility makes them suitable for applications ranging from construction reinforcements to machinery components. Suryadev's MS Rounds are manufactured with precision to deliver superior quality, making them suitable for a wide range of industrial and structural applications.</p>
+                                <a href="#" class="discover-more-tab">
+                                    <span>Discover More</span>
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media & TVC Section -->
+        <section class="media-split-section">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <div class="video-wrapper">
+                            <iframe 
+                                src="https://www.youtube.com/embed/eEc6S67SdYQ?si=yY0nQj6Eg-MSj3xg&autoplay=0&mute=0" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="strength-content">
+                            <img src="https://suryadev.in/wp-content/uploads/2024/12/suryadev-tmt-rebar.png" alt="Suryadev TMT" class="logo-overlay">
+                            <div class="strength-text">
+                            
+                            </div>
+                            <a href="#" class="discover-more">Discover More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Impact Section -->
+        <section class="social-impact">
+            <div class="container">
+                <h2 class="social-impact-title">Social Impact</h2>
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/f66f68c3b2a1d13ed2109613d33516f7-scaled-1-1.webp" alt="Education Empowerment">
+                        <div class="card-overlay">
+                            <h2>Education Empowerment</h2>
+                        </div>
+                    </div>
+                    <div class="impact-card">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/5-3-1-scaled-1.webp" alt="Environmental Sustainability">
+                        <div class="card-overlay">
+                            <h2>Environmental Sustainability</h2>
+                        </div>
+                    </div>
+                    <div class="impact-card">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/BHNE0713311_t-scaled-1-1-scaled-2.webp" alt="Community Development">
+                        <div class="card-overlay">
+                            <h2>Community Development</h2>
+                        </div>
+                    </div>
+                    <div class="impact-card">
+                        <img src="https://suryadev.in/wp-content/uploads/2024/12/portrait-female-pediatrician-work-1-scaled-1.webp" alt="Public Health">
+                        <div class="card-overlay">
+                            <h2>Public Health</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://suryadev.in/wp-content/uploads/2024/12/logo-1.png" alt="Suryadev Alloys and Power">
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Who We Are</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Overview</a></li>
+                        <li><a href="#">Certification and Clientele</a></li>
+                        <li><a href="#">Social Impact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Sponge Iron</a></li>
+                        <li><a href="#">Mild Steel Billets</a></li>
+                        <li><a href="#">TMT Bars</a></li>
+                        <li><a href="#">Mild Steel Rounds</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Media</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Events and Press Coverages</a></li>
+                        <li><a href="#">Brochure & Catalogue</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <ul class="contact-list">
+                        <li class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                 <span>No. 497 & 498, 8th Floor,<br> ISANA BUILDING, 
+                                  Poonamallee High Rd, Arumbakkam, Chennai,<br>
+                                  Tamil Nadu 600106.</span>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-text">
+                                <p>+91 93818 50000 | 044 42221000</p>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-text">
+                                <p>sales@suryadev.in</p>
+                                <p>info@suryadev.in</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>Copyright © 2024, Suryadev Alloys and Power Private Limited.</div>
+                <div>Designed and Developed By Innoblitz Technologies and Systems Pvt ltd.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add jQuery if not already present -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        // Initialize counter when section comes into view
+        function initCounter() {
+            $('.counter-count').each(function () {
+                var $this = $(this);
+                var text = $this.text();
+                
+                // Skip if not a number
+                if (isNaN(text)) return;
+                
+                $this.prop('Counter', 0).animate({
+                    Counter: text
+                }, {
+                    duration: 4000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $this.text(Math.ceil(now));
+                    },
+                    complete: function() {
+                        // Ensure final number is exactly as specified
+                        $this.text(text);
+                    }
+                });
+            });
+
+            // Animate credit rating
+            var ratingElement = $('.rating-count');
+            var ratings = ['A0', 'A1', 'A-/A2'];
+            var currentIndex = 0;
+            
+            var ratingInterval = setInterval(function() {
+                ratingElement.text(ratings[currentIndex]);
+                currentIndex++;
+                
+                if (currentIndex >= ratings.length) {
+                    clearInterval(ratingInterval);
+                }
+            }, 1000);
+        }
+
+        // Start counter when element comes into view
+        $(document).ready(function() {
+            var statisticsSection = $('.statistics-section');
+            var counted = false;
+            
+            $(window).scroll(function() {
+                var oTop = statisticsSection.offset().top - window.innerHeight;
+                if (!counted && $(window).scrollTop() > oTop) {
+                    initCounter();
+                    counted = true;
+                }
+            });
+
+            // Check if already in view when page loads
+            if ($(window).scrollTop() > statisticsSection.offset().top - window.innerHeight) {
+                initCounter();
+                counted = true;
+            }
+        });
+    </script>
+</body>
+</html> 
